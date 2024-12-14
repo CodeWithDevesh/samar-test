@@ -1,49 +1,50 @@
 import React, { useEffect } from "react";
 
-const MemberForm = ({ value, setValue, index }) => {
+const MemberForm = ({ value, setValue, count }) => {
   useEffect(() => {
-    if (value.length <= index) {
+    if (value.length < count) {
       setValue((prev) => {
         const updatedArray = [...prev];
-        while (updatedArray.length <= index) {
+        while (updatedArray.length < count) {
           updatedArray.push({ name: "", year: null });
         }
         return updatedArray;
       });
     }
-  }, [value, index, setValue]);
+  }, [value, count, setValue]);
 
-  const handleInputChange = (field, fieldValue) => {
+  const handleInputChange = (index, field, fieldValue) => {
     setValue((prev) => {
       const updatedArray = [...prev];
-      while (updatedArray.length <= index) {
-        updatedArray.push({ name: "", year: null });
-      }
       updatedArray[index] = { ...updatedArray[index], [field]: fieldValue };
       return updatedArray;
     });
   };
 
   return (
-    <div>
-      <h3>{`Team Member ${index + 2}`}</h3>
-      <div className="flex flex-col space-y-3">
-        <input
-          type="text"
-          placeholder="Name"
-          value={value[index]?.name || ""}
-          onChange={(e) => handleInputChange("name", e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-lg"
-        />
-        <input
-          type="number"
-          placeholder="Year"
-          value={value[index]?.year || ""}
-          onChange={(e) => handleInputChange("year", e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-lg"
-        />
-      </div>
-    </div>
+    <>
+      {Array.from({ length: count }, (_, index) => (
+        <div key={index}>
+          <h3>{`Team Member ${index + 2}`}</h3>
+          <div className="flex flex-col space-y-3">
+            <input
+              type="text"
+              placeholder="Name"
+              value={value[index]?.name || ""}
+              onChange={(e) => handleInputChange(index, "name", e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+            <input
+              type="number"
+              placeholder="Year"
+              value={value[index]?.year || ""}
+              onChange={(e) => handleInputChange(index, "year", e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+        </div>
+      ))}
+    </>
   );
 };
 
