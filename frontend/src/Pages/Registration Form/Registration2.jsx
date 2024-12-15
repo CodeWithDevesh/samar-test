@@ -75,7 +75,6 @@ const Registration2 = () => {
         }
         let cont = true;
         memberDetails.forEach((v) => {
-          console.log(v);
           if (!v.name || !v.year) {
             cont = false;
           }
@@ -107,6 +106,10 @@ const Registration2 = () => {
       leaderYear: leaderDetails.year,
     };
 
+    memberDetails.forEach((v, i) => {
+      payload[`member_${i + 2}_name`] = v.name;
+      payload[`member_${i + 2}_year`] = v.year;
+    });
     try {
       const response = await fetch(scriptURL, {
         method: "POST",
@@ -172,7 +175,7 @@ const Registration2 = () => {
           <MemberForm
             value={memberDetails}
             setValue={setMemberDetails}
-            count={players-1}
+            count={players - 1}
           />
         )}
 
