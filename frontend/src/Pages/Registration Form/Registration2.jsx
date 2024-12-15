@@ -32,7 +32,7 @@ const Registration2 = () => {
   };
 
   const scriptURL =
-    "https://script.google.com/macros/s/AKfycbztFk4gM7hvM21S9TbZQ9BG8t0mugJPBX1vz7OOyFncrKPG0O9hpCO9SOyLzBc5B0n5aQ/exec";
+    "https://script.google.com/macros/s/AKfycbwxrQMHKa2hYdXgZrJ-EfKY7_sEDGNdt--aEB175uQHFNr7kLA1LxINyWAXP9ACwBqu/exec";
 
   useEffect(() => {
     // Get no of players for the particular sport from the server
